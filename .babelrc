@@ -1,0 +1,23 @@
+{
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "useBuiltIns": false,
+        "targets": {
+          "chrome": "78"
+        }
+      }
+    ],
+    "@babel/preset-react"
+  ],
+  "plugins": [
+    [
+      "import",
+      {
+        "libraryName": "antd",
+        "style": "css"
+      }
+    ]
+  ]
+}
