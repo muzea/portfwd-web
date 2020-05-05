@@ -2,13 +2,15 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
+const isProd = process.env.prod;
+
 module.exports = {
-  entry: "./src/App.jsx",
-  mode: "production",
+  entry: "./src/App.tsx",
+  mode: isProd ? "production" : "development",
   module: {
     rules: [
       {
-        test: /\.m?jsx?$/,
+        test: /\.m?[jt]sx?$/,
         exclude: /node_modules/,
         use: {
           loader: "babel-loader",
@@ -42,4 +44,10 @@ module.exports = {
     }),
     new MiniCssExtractPlugin(),
   ],
+  devServer: {
+    contentBase: path.join(__dirname, "dist"),
+    compress: true,
+    port: 9000,
+    open: true
+  },
 };
