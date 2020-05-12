@@ -32,7 +32,7 @@
   },
   "dependencies": {
     "antd": "4",
-    "react": "npm:@pika/react",
-    "react-dom": "npm:@pika/react-dom"
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
   }
 }
