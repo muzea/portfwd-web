@@ -2,11 +2,8 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
-const isProd = process.env.prod;
-
 module.exports = {
-  entry: "./src/App.tsx",
-  mode: isProd ? "production" : "development",
+  entry: "./src/mount.tsx",
   module: {
     rules: [
       {
@@ -30,12 +27,27 @@ module.exports = {
       },
     ],
   },
+  resolve: {
+    extensions: [".wasm", ".mjs", ".js", ".json", ".jsx", ".tsx", ".ts"],
+  },
   output: {
-    filename: "app.js",
+    filename: "[name].js",
     path: path.resolve(__dirname, "dist"),
   },
   optimization: {
     usedExports: true,
+    concatenateModules: false,
+    splitChunks: {
+      chunks: "all",
+      cacheGroups: {
+        vendor: {
+          test: /node_modules/,
+          chunks: "initial",
+          name: "vendor",
+          enforce: true,
+        },
+      },
+    },
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -48,6 +60,6 @@ module.exports = {
     contentBase: path.join(__dirname, "dist"),
     compress: true,
     port: 9000,
-    open: true
+    open: true,
   },
 };
